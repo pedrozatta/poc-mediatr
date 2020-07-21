@@ -17,6 +17,7 @@ public class FindByIdProjectHandler implements RequestHandler<FindByIdProjectReq
     protected ProjectService service;
 
     public ProjectResponse handle(FindByIdProjectRequest request) {
+        log.info("handle");
         Project project = service.findById(request.getId());
         return ProjectResponse.builder()
                 .id(project.getId())

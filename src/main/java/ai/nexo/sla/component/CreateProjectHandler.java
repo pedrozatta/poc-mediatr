@@ -17,6 +17,7 @@ public class CreateProjectHandler implements RequestHandler<CreateProjectRequest
     protected ProjectService service;
 
     public ProjectResponse handle(CreateProjectRequest request) {
+        log.info("handle");
         Project project = Project.builder().title(request.getTitle()).build();
         project = service.create(project);
         return ProjectResponse.builder()

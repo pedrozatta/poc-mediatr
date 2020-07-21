@@ -1,6 +1,7 @@
 package ai.nexo.sla.controller;
 
 import ai.nexo.sla.dto.CreateProjectRequest;
+import ai.nexo.sla.dto.FindByIdProjectRequest;
 import ai.nexo.sla.dto.ProjectResponse;
 import ai.nexo.sla.model.Project;
 import ai.nexo.sla.service.ProjectService;
@@ -50,8 +51,8 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Project findById(@PathVariable("id") final Long id) {
-        return service.findById(id);
+    public ProjectResponse findById(@PathVariable("id") final Long id) {
+        return mediator.dispatch(new FindByIdProjectRequest(id));
     }
 
     @DeleteMapping("/{id}")
