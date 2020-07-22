@@ -42,7 +42,7 @@ class ContactFunctionalSpec extends Specification {
     }
 
     @Unroll
-    def "Create project fail"() {
+    def "Create contact fail"() {
 
         when:
             def result = client.post(body: [title: title])
