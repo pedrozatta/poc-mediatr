@@ -9,7 +9,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ProjectFunctionalSpec extends Specification {
+class ContactFunctionalSpec extends Specification {
 
     @Shared
     RESTClient client
@@ -18,25 +18,26 @@ class ProjectFunctionalSpec extends Specification {
     int port;
 
     def setup() {
-        client = new RESTClient("http://localhost:${port}/projects")
+        client = new RESTClient("http://localhost:${port}/contacts")
         client.contentType = ContentType.JSON
     }
 
     @Unroll
-    def "Create project success title: '#title'"() {
+    def "Create contact success type:#type value:#value"() {
 
         when:
-            def result = client.post(body: [title: title])
+            def result = client.post(body: [value: value, type: type])
 
         then:
             result?.data?.id != null
-            result?.data?.title == title
+            result?.data?.value == value
+            result?.data?.type == type
 
         where:
-            title      | _
-            "Titulo"   | _
-            "zzz"      | _
-            "asdf1234" | _
+            type    | value
+            "email" | "teste@teste.com.br"
+            "email" | "teste2@teste.com.br"
+            "phone" | "555-5555"
 
     }
 
@@ -44,12 +45,11 @@ class ProjectFunctionalSpec extends Specification {
     def "Create project fail"() {
 
         when:
-            def result = client.post(body: [title1: title])
+            def result = client.post(body: [title: title])
 
         then:
             def e = thrown(Exception)
-            result?.data?.id != null
-            result?.data?.title == title
+            e.statusCode == 400
 
         where:
             title      | _
