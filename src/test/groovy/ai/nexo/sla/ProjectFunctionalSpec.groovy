@@ -40,4 +40,23 @@ class ProjectFunctionalSpec extends Specification {
 
     }
 
+    @Unroll
+    def "Create project fail"() {
+
+        when:
+            def result = client.post(body: [title1: title])
+
+        then:
+            def e = thrown(Exception)
+            result?.data?.id != null
+            result?.data?.title == title
+
+        where:
+            title      | _
+            "Titulo"   | _
+            "zzz"      | _
+            "asdf1234" | _
+
+    }
+
 }
