@@ -17,7 +17,6 @@ public class ContactService {
     @Autowired
     protected ContactRepository repository;
 
-
     public Contact create(Contact contact) {
         log.info("create");
         contact.setId(null);
