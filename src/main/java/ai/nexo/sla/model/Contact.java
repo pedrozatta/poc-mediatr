@@ -17,13 +17,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "TB_PROJECT")
+@Table(name = "TB_CONTACT")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Project {
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,18 +31,14 @@ public class Project {
     private Long id;
 
     @NotEmpty
-    @Column(name = "TITLE",length = 50)
-    private String title;
+    @Column(name = "VALUE", length = 50)
+    private String value;
 
-    @Column(name = "DESCRIPTION",length = 250)
-    private String description;
-
-    @Column(name = "STATUS",length = 20)
+    @Column(name = "TYPE", length = 20)
     @Enumerated(EnumType.STRING)
-    private ProjectStatus status;
+    private ContactType type;
 
-    @Column(name = "OWNER",length = 50)
-    private String owner;
-
+    @Column(name = "PREFERRED")
+    private Boolean preferred;
 
 }

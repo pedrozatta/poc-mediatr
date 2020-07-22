@@ -1,4 +1,4 @@
-package ai.nexo.sla.dto;
+package ai.nexo.sla.dto.contact;
 
 import io.jkratz.mediator.core.Request;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @AllArgsConstructor
-public class FindByIdProjectRequest implements Request<ProjectResponse> {
+public class ContactFindByIdRequest implements Request<ContactResponse> {
 
     @NotEmpty
     private Long id;
